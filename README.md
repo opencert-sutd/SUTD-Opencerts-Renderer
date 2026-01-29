@@ -1,4 +1,4 @@
-# TradeTrust Decentralized Renderer (React Template)
+# Decentralized Renderer (React Template)
 
 This template serves as a quick way to start building your own decentralized renderer using TradeTrust stack. You can follow our tutorial over at (https://docs.tradetrust.io/docs/tutorial/decentralised-renderer/).
 
