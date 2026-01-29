@@ -1,10 +1,10 @@
 {
-  "name": "tradetrust-decentralized-renderer",
+  "name": "decentralized-renderer",
   "version": "0.1.0-development",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/TradeTrust/tradetrust-decentralized-renderer.git"
+    "url": "https://github.com/opencert-sutd/SUTD-Opencerts-Renderer"
   },
   "license": "Apache-2.0",
   "main": "build/index.js",
@@ -29,6 +29,7 @@
     "date-fns": "^3.3.1",
     "debug": "^4.3.4",
     "escape-goat": "4.0.0",
+    "moment-timezone": "^0.6.0",
     "qrcode.react": "^4.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
