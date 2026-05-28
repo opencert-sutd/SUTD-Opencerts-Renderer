@@ -3,16 +3,9 @@ import React from "react";
 import { get } from "lodash";
 import _ from "lodash";
 import { tz } from "moment-timezone";
-import { format, parseISO } from "date-fns";
-import {  SUTD_CERT_LOGO,
-  SUTD_SEAL,
-  SUTD_FOOTER_1,
-  SUTD_FOOTER_2,
-  SUTD_FOOTER_3
-} from "./images";
+import { SUTD_CERT_LOGO, SUTD_SEAL } from "./images";
 
 export const TIMEZONE = "Asia/Singapore";
-export const TIMEZONE1 = "Singapore Standard Time";
 
 export const formatDateFullMonthProper = dateString => {
   if (!dateString) return null;
@@ -20,414 +13,308 @@ export const formatDateFullMonthProper = dateString => {
   return tz(date, TIMEZONE).format("D MMMM YYYY");
 };
 
-//Added By Suresh For DOB field in Cert On Jan 2021 Begin
 export const formatDateFullMonth = dateString => {
   if (!dateString) return null;
-   dateString = dateString.replace("+08:00","");
-   const date = new Date(dateString);	
-   return tz(date, TIMEZONE).format("D MMMM YYYY");
+  dateString = dateString.replace("+08:00", "");
+  const date = new Date(dateString);
+  return tz(date, TIMEZONE).format("D MMMM YYYY");
 };
-//Added By Suresh For DOB field in Cert Jan-2021 End
 
-const GothamMedium12pt = {
+const text = {
   fontFamily: "Arial",
-  fontSize: "1.5em",
-  textAlign: "center",
+  fontSize: "14px",
+  color: "black"
+};
+
+const bold = {
+  ...text,
+  fontWeight: "bold"
+};
+
+const title = {
+  fontFamily: "Arial",
+  fontSize: "22px",
+  fontWeight: "bold",
+  color: "black"
+};
+
+const brownTitle = {
+  fontFamily: "Arial",
+  fontSize: "22px",
   color: "brown"
 };
 
-const Arial12pt = {
-  fontFamily: "Arial",
-  fontSize: "18px",
-  textAlign: "center",
-  color: "black",
-  fontWeight: "bold"
-};
-
-const Arial25pt = {
-  fontFamily: "Arial",
-  fontSize: "25px",
-  fontStyle: "Bold",
-  textAlign: "center",
-  color: "Black"
-};
-
-const Arial20pt = {
-  fontFamily: "Arial",
-  fontSize: "20px",
-  textAlign: "center",
-  color: "black",
-  fontWeight: "bold"
-};
-
-const Arial15pt = {
-  fontFamily: "Arial",
-  fontSize: "16px",
-  fontStyle: "Bold",
-  color: "Black"
-};
-
-const Arial5pt = {
+const smallBrown = {
   fontFamily: "Arial",
   fontSize: "10px",
-  color: "Brown"
+  color: "brown"
 };
 
-const Arial15ptp = {
-  fontFamily: "Arial",
-  fontSize: "14px",
-  fontStyle: "Bold",
-  textAlign: "left",
-  color: "Black",
-  "white-space": "pre-wrap",
-  marginLeft: "4rem",
-  textTransform: "uppercase"
-};
-
-const Arial14ptp = {
-  fontFamily: "Arial",
-  fontSize: "16px",
-  fontStyle: "Bold",
-  textAlign: "left",
-  color: "Black",
-  "white-space": "pre-wrap",
-
-};
-
-export const thWidth60Left = {
-  width: "60%",
-  textAlign: "left"
-};
-
-export const fullWidthStyle = {
+const outerWrapperStyle = {
   width: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "flex-start",
+  backgroundColor: "transparent",
+  padding: "20px 0",
+  overflow: "hidden"
+};
+
+const pageStyle = {
+  width: "1120px",
+  backgroundColor: "#fff",
+  boxSizing: "border-box",
+  padding: "20px 45px 30px 45px",
+  overflow: "visible"
+};
+
+const headerStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  borderBottom: "1px solid #ddd",
+  paddingBottom: "12px"
+};
+
+const logoStyle = {
+  width: "230px",
   height: "auto"
 };
 
+const sectionStyle = {
+  marginTop: "24px"
+};
+
+const infoGridStyle = {
+  display: "grid",
+  gridTemplateColumns: "160px 1fr",
+  columnGap: "10px",
+  rowGap: "10px",
+  marginTop: "18px"
+};
+
+const activityIntroStyle = {
+  ...text,
+  marginTop: "28px",
+  lineHeight: "1.5"
+};
+
+const tableHeader2Style = {
+  display: "grid",
+  gridTemplateColumns: "1fr 220px",
+  border: "1px solid black",
+  marginTop: "12px"
+};
+
+const tableHeader3Style = {
+  display: "grid",
+  gridTemplateColumns: "1fr 100px 220px",
+  border: "1px solid black",
+  marginTop: "12px"
+};
+
+const tableCellStyle = {
+  ...text,
+  padding: "6px 8px",
+  borderRight: "1px solid black"
+};
+
+const tableCellLastStyle = {
+  ...text,
+  padding: "6px 8px"
+};
+
+const footerLineStyle = {
+  border: "none",
+  borderTop: "1px solid black",
+  margin: "24px 0 16px 0"
+};
+
 export const SubjectGrades = ({ document }) => {
-  const fifthrowtype = _(document.transcript)
+  const fifthRowTypes = _(document.transcript)
     .groupBy(t => t.Type)
     .map((values, key) => ({
       Type: key,
-      name: values
+      name: values,
+      Seq: get(values, "[0].Seq")
     }))
     .orderBy(s => s.Seq)
     .value();
 
-  const semesterHeader = s => (
-    <div className="row">
-      <div className="col-12"><span style={Arial20pt}>{s.Type}</span></div>
+  return (
+    <div style={sectionStyle}>
+      {fifthRowTypes.map((s, j) => {
+        const titleText = get(s.name, "[0].Title");
+        const level = get(s.name, "[0].Level");
+
+        return (
+          <div key={j} style={{ marginTop: "22px" }}>
+            <div style={{ ...bold, fontSize: "18px", marginBottom: "10px" }}>
+              {s.Type}
+            </div>
+
+            {level ? (
+              <>
+                <div style={tableHeader3Style}>
+                  <div style={tableCellStyle}>
+                    <strong>{titleText}</strong>
+                  </div>
+                  <div style={tableCellStyle}>
+                    <strong>Level</strong>
+                  </div>
+                  <div style={tableCellLastStyle}>
+                    <strong>Period</strong>
+                  </div>
+                </div>
+
+                {s.name.map((t, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 100px 220px",
+                      borderLeft: "1px solid black",
+                      borderRight: "1px solid black",
+                      borderBottom: "1px solid black"
+                    }}
+                  >
+                    <div style={tableCellStyle}>{t.name}</div>
+                    <div style={tableCellStyle}>{t.Level}</div>
+                    <div style={tableCellLastStyle}>{t.Period}</div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>
+                <div style={tableHeader2Style}>
+                  <div style={tableCellStyle}>
+                    <strong>{titleText}</strong>
+                  </div>
+                  <div style={tableCellLastStyle}>
+                    <strong>Period</strong>
+                  </div>
+                </div>
+
+                {s.name.map((t, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 220px",
+                      borderLeft: "1px solid black",
+                      borderRight: "1px solid black",
+                      borderBottom: "1px solid black"
+                    }}
+                  >
+                    <div style={tableCellStyle}>{t.name}</div>
+                    <div style={tableCellLastStyle}>{t.Period}</div>
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
-  
-
-  const subjects = fifthrowtype.map((s, j) => {
-    const semesterSubjects = s.name.map((t, i) => (
-    <div className="row" key={i}>
-		<div className="fifth-row-cell-1 col-7">
-          <span style={Arial15pt}>{t.name}</span>
-        </div>
-        <div className="fifth-row-cell-2 col-4">
-          <span style={Arial15pt}>{t.Period}</span>
-        </div>
-    </div>
-    ));	
-	
-    const semesterSubjects_Award = s.name.map((t, i) => (
-    <div className="row" key={i}>
-		<div className="fifth-row-cell-1 col-6">
-          <span style={Arial15pt}>{t.name}</span>
-        </div>
-		<div className="fifth-row-cell-1 col-1">
-          <span style={Arial15pt}>{t.Level}</span>
-        </div>		
-        <div className="fifth-row-cell-2 col-4">
-          <span style={Arial15pt}>{t.Period}</span>
-        </div>
-    </div>
-    ));	
-	
-	const Title = get(s.name, "[0].Title");
-	const Level = get(s.name, "[0].Level");
-	
-    return Level ? (
-    <div key={j}>
-        {semesterHeader(s)}
-	  	<br/>
-		<div className="row">
-		    <div className="fifth-row-cell-1 col-6">
-			<span style={Arial15pt}><strong>{Title}</strong></span>
-            </div>
-			<div className="fifth-row-cell-1 col-1">
-			<span style={Arial15pt}><strong>Level</strong></span>
-			</div>
-			<div className="fifth-row-cell-2 col-4">
-			<span style={Arial15pt}><strong>Period</strong></span>
-			</div>
-		</div>
-			{semesterSubjects_Award} 
-        <br/>
-
-    </div>
-    ) : 
-	(<div key={j}>
-        {semesterHeader(s)}
-	  	<br/>
-		<div className="row">
-		    <div className="fifth-row-cell-1 col-7">
-			<span style={Arial15pt}><strong>{Title}</strong></span>
-            </div>
-			<div className="fifth-row-cell-2 col-4">
-			<span style={Arial15pt}><strong>Period</strong></span>
-			</div>
-		</div>
-			{semesterSubjects} 
-        <br/>
-
-    </div>);
-  });
-
-  return <div>{subjects}</div>;
 };
 
 const Transcript = ({ document }) => (
-  <div className="container">
-    <div className="transcript-content">
-      <style>
-        {`
-      .sutd-logo {
-        padding-top:1.2em;
-        float:right;
-        width:20%;
-      }
-	  
-	  .Title2 {
-        padding-top:1em;
-        float:left;
-		font-family: Arial;
-        font-size:1.5em;
-		font-weight:bold
-      }
-      
-      .page-title {
-        font-weight:bold;
-		color:Brown;
-        font-size:1.5em;
-        padding-top:1em;
-
-      }
-	  
-	  .sutd-seal{
-        width:80%;
-      }
-	  
-	 .page-title2{
-        font-weight:bold;
-		font-color:red;
-        font-size:1em;
-        padding-top:3em;
-        text-align:left;
-      }
-	  
-	  .exam-results-header {
-        border-top: 2px solid #212529;
-        border-bottom: 2px solid #212529;
-        margin-bottom:0.8em;
-        font-weight: bold
-      }
-	  
-.no-gutters {
-  margin-right: 0;
-  margin-left: 0;
-
-  > .col,
-  > [class*="col-"] {
-    padding-right: 0;
-    padding-left: 0;
-  }
-}
-
-      .semester-header{
-        font-weight: bold;
-        text-transform:uppercase;
-      }
-
-      .semester-header.exemption {
-        text-transform: none;
-      }
-
-      .credit-unit {
-        text-align: center
-      }
-	  
-      .grade {
-        text-align: left
-      }
-	  
-      .name {
-        text-align: left
-      }	  
-	  
-	.fifth-row-cell-1 {
-      border: 1px solid #212529;
-	  border-right:none;
-    }
-	
-	.fifth-row-cell-2 {
-      border: 1px solid #212529;
-    }
-
-      .exam-results-footer{
-        font-weight: bold
-      }
-      `}
-      </style>
-      <br />
-      <br />
-      <div className="row">
-        <div className="col-12">
-          <div className="Title2">Office of the Registrar</div>
-          <img
-            src={SUTD_CERT_LOGO}
-            className="sutd-logo"
-            title="Singapore University of Technology and Design"
-          />
-        </div>
-      </div>
-      <br />
-      <div className="row">
-        <div className="col-5">
-          <span style={GothamMedium12pt}>Fifth Row Activities</span>
-        </div>
-      </div>
-      <div className="row">
-        <hr align="center" width="100%" color="brown" />
-      </div>
-
-
-      <div className="row">
-        <div className="col-7">
-	<span style={Arial12pt}>{document.recipient.name}</span>
-        </div>
-		<br/>
-		<br/>
-        <div className="col-7">
-          <div className="row">
-            <div className="col-7">
-              <span style={Arial15pt}>SUTD ID :<strong>{document.recipient.studentId}</strong></span>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-7">
-              <span style={Arial15pt}>Date of Birth :{" "}
-              <strong>
-                {formatDateFullMonth(document.recipient.Birthdate)}
-              </strong></span>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-7">
-              <span style={Arial15pt}>Date of Admission :{" "}
-              <strong>
-                {formatDateFullMonthProper(document.recipient.AdmissionDate)}
-              </strong></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-2" style={{ marginTop: "1rem" }}>
-          {" "}
-          <span style={Arial15pt}>Programme :</span>
-        </div>
-        <div className="col-5" style={{ marginTop: "1rem" }}>
-          {" "}
-          <span style={Arial15pt}><strong>{document.recipient.Programme}</strong></span>
-        </div>
-
-      </div>
-	   <div style={{ marginTop: "2rem" }}>
-          {" "}
-          <span style={Arial15pt}>Fifth Row Activities are activities undertaken by students outside the classroom. Please refer to the guide at the back for more information.</span>
-        </div>
-      <br />
-
-      <div>
-        <SubjectGrades document={document} />
-      </div>
-	  
-	  
-	<hr align="center" width="100%" color="black" />
-      <div className="row d-flex justify-content-center">
-        <span style={Arial15pt}>
-          <strong>-END OF RECORD-</strong>
-        </span>
-      </div>
-      <div className="row d-flex justify-content-center">
-        <span style={Arial15pt}>
-          <strong>-No Entries Valid Below This Line-</strong>
-        </span>
-      </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <div className="col-5">
+  <div style={outerWrapperStyle}>
+    <div style={pageStyle}>
+      <div style={headerStyle}>
         <div>
-          <img src={SUTD_SEAL} className="sutd-seal" />
+          <span style={title}>Office of the Registrar</span>
+          <span style={brownTitle}>Fifth Row Activities</span>
+        </div>
+
+        <img
+          src={SUTD_CERT_LOGO}
+          style={logoStyle}
+          title="Singapore University of Technology and Design"
+          alt="SUTD Logo"
+        />
+      </div>
+
+      <div style={sectionStyle}>
+        <div style={{ ...bold, fontSize: "16px" }}>
+          {document.recipient.name}
         </div>
       </div>
 
-      <hr align="center" width="100%" color="Brown" />
+      <div style={sectionStyle}>
+        <div style={text}>
+          SUTD ID : <strong>{document.recipient.studentId}</strong>
+        </div>
+        <div style={text}>
+          Date of Birth :{" "}
+          <strong>{formatDateFullMonth(document.recipient.Birthdate)}</strong>
+        </div>
+        <div style={text}>
+          Date of Admission :{" "}
+          <strong>
+            {formatDateFullMonthProper(document.recipient.AdmissionDate)}
+          </strong>
+        </div>
+      </div>
 
-      <div className="d-flex justify-content-center">
-        <div>
-          <span style={Arial5pt}>
-            {
-              "An official transcript is printed on watermarked security paper and endorsed with the Registrar's signature in blue. A raised seal is not required."
-            }
-          </span>
-        </div>
+      <div style={infoGridStyle}>
+        <div style={text}>Programme :</div>
+        <div style={bold}>{document.recipient.Programme}</div>
       </div>
-      <div className="d-flex justify-content-center">
-        <div>
-          <span style={Arial5pt}>
-            A black and white transcript is not an original. Transcript guide on
-            back.
-          </span>
-        </div>
-      </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
 
-      <div className="row">
-        <div className="col-5">
-          <div>
-            <img src={document.additionalData.footer[0].footer} />
-          </div>
+      <div style={activityIntroStyle}>
+        Fifth Row Activities are activities undertaken by students outside the
+        classroom. Please refer to the guide at the back for more information.
+      </div>
+
+      <SubjectGrades document={document} />
+
+      <hr style={footerLineStyle} />
+
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <div style={bold}>-END OF RECORD-</div>
+        <div style={bold}>-No Entries Valid Below This Line-</div>
+      </div>
+
+      <div style={{ marginTop: "30px" }}>
+        <img
+          src={SUTD_SEAL}
+          style={{ width: "260px", height: "auto" }}
+          alt="SUTD Seal"
+        />
+      </div>
+
+      <hr
+        style={{
+          border: "none",
+          borderTop: "1px solid brown",
+          margin: "20px 0"
+        }}
+      />
+
+      <div style={{ textAlign: "center" }}>
+        <div style={smallBrown}>
+          An official transcript is printed on watermarked security paper and
+          endorsed with the Registrar&apos;s signature in blue. A raised seal is
+          not required.
+        </div>
+        <div style={smallBrown}>
+          A black and white transcript is not an original. Transcript guide on
+          back.
         </div>
       </div>
-      <div className="row">
-        <div className="col-5">
-          <div>
-            <img src={document.additionalData.footer[1].footer} />
+
+      {document.additionalData.footer &&
+        document.additionalData.footer.map((item, index) => (
+          <div key={index} style={{ marginTop: "10px" }}>
+            <img
+              src={item.footer}
+              style={{ maxWidth: "100%", height: "auto" }}
+              alt={`Footer ${index + 1}`}
+            />
           </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-5">
-          <div>
-            <img src={document.additionalData.footer[2].footer} />
-          </div>
-        </div>
-      </div>
+        ))}
     </div>
   </div>
 );
