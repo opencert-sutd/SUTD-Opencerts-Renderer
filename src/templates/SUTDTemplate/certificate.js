@@ -67,16 +67,17 @@ const GothamMedium265pt = {
 
 const outerWrapperStyle = {
   width: "100%",
-  minHeight: "100vh",
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
-  backgroundColor: "#f5f5f5"
+  alignItems: "flex-start",
+  backgroundColor: "transparent",
+  padding: "20px 0",
+  overflow: "hidden"
 };
 
 const certificateStyle = {
-  width: "1536px",
-  height: "864px",
+  width: "1120px",
+  height: "630px",
   margin: "0 auto",
   border: "1px solid black",
   backgroundPosition: "1px",
@@ -85,7 +86,7 @@ const certificateStyle = {
   backgroundSize: "75px 75px",
   boxSizing: "border-box",
   position: "relative",
-  paddingTop: "70px",
+  paddingTop: "45px",
   overflow: "hidden"
 };
 
