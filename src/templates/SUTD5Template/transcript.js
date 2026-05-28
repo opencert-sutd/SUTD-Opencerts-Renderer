@@ -31,19 +31,6 @@ const bold = {
   fontWeight: "bold"
 };
 
-const title = {
-  fontFamily: "Arial",
-  fontSize: "22px",
-  fontWeight: "bold",
-  color: "black"
-};
-
-const brownTitle = {
-  fontFamily: "Arial",
-  fontSize: "22px",
-  color: "brown"
-};
-
 const smallBrown = {
   fontFamily: "Arial",
   fontSize: "10px",
@@ -72,13 +59,35 @@ const headerStyle = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "flex-start",
-  borderBottom: "1px solid #ddd",
-  paddingBottom: "12px"
+  borderBottom: "4px solid #cc0000",
+  paddingBottom: "12px",
+  marginBottom: "25px"
+};
+
+const headerLeftStyle = {
+  display: "flex",
+  flexDirection: "column"
+};
+
+const registrarTitleStyle = {
+  fontFamily: "Arial",
+  fontSize: "24px",
+  color: "black",
+  marginBottom: "55px"
+};
+
+const diveTitleStyle = {
+  fontFamily: "Arial",
+  fontSize: "28px",
+  color: "#cc0000",
+  fontWeight: "400",
+  lineHeight: "1.2"
 };
 
 const logoStyle = {
-  width: "230px",
-  height: "auto"
+  width: "270px",
+  height: "auto",
+  objectFit: "contain"
 };
 
 const sectionStyle = {
@@ -223,9 +232,12 @@ const Transcript = ({ document }) => (
   <div style={outerWrapperStyle}>
     <div style={pageStyle}>
       <div style={headerStyle}>
-        <div>
-          <span style={title}>Office of the Registrar</span>
-          <span style={brownTitle}>Fifth Row Activities</span>
+        <div style={headerLeftStyle}>
+          <div style={registrarTitleStyle}>Office of the Registrar</div>
+
+          <div style={diveTitleStyle}>
+            Design Innovation and Venture Exploration (DIVE) Certificate
+          </div>
         </div>
 
         <img
