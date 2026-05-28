@@ -1,13 +1,10 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { format } from "date-fns";
 import { tz } from "moment-timezone";
 import { get } from "lodash";
 import {
   SUTD_CERT_BG,
-  SUTD_CERT_LOGO,
-  SUTD_CHAIR,
-  SUTD_PRESIDENT
+  SUTD_CERT_LOGO
 } from "./images";
 
 export const TIMEZONE = "Asia/Singapore";
@@ -39,7 +36,6 @@ const GothamMedium10pt = {
   color: "black"
 };
 
-
 const GothamMedium12pt = {
   fontFamily: "Gotham Medium",
   fontSize: "12px",
@@ -49,7 +45,7 @@ const GothamMedium12pt = {
 
 const GothamBold12pt = {
   fontFamily: "Gotham Medium",
-  fontStyle: "Bold",
+  fontWeight: "bold",
   fontSize: "12px",
   textAlign: "center",
   color: "black"
@@ -69,177 +65,214 @@ const GothamMedium265pt = {
   color: "Black"
 };
 
-const borderImgStyle = {
-  border: "1px solid",
-  borderColor: "black",
+const outerWrapperStyle = {
+  width: "100%",
+  minHeight: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "#f5f5f5"
+};
+
+const certificateStyle = {
+  width: "1536px",
+  height: "864px",
+  margin: "0 auto",
+  border: "1px solid black",
   backgroundPosition: "1px",
   backgroundRepeat: "repeat",
   backgroundImage: `url(${SUTD_CERT_BG})`,
-  backgroundSize: "75px 75px"
+  backgroundSize: "75px 75px",
+  boxSizing: "border-box",
+  position: "relative",
+  paddingTop: "70px",
+  overflow: "hidden"
 };
 
 const logoImgStyle = {
   width: "150px",
   height: "60px",
-  marginLeft: "43%",
-  marginTop: "5%"
+  display: "block",
+  margin: "0 auto"
+};
+
+const centerRowStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%"
 };
 
 const chairImgStyle = {
   width: "150px",
   height: "60px",
-  borderBottom: "1px solid"
+  borderBottom: "1px solid black"
 };
 
 const presidentImgStyle = {
   width: "150px",
   height: "60px",
-  borderBottom: "1px solid"
+  borderBottom: "1px solid black"
 };
 
-export const Plan =({ document }) => {
-	
-	const DegreePlan = get(document, "recipient.Plan",undefined);
-	return DegreePlan ? (
-      <div className="row d-flex justify-content-center align-items-center">
-        {" "}
-        <span style={GothamMedium165pt}>{document.recipient.Plan}</span>
-      </div>) :null;
- 	
+const signatureSectionStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  width: "520px",
+  margin: "55px auto 0 auto"
 };
 
-export const SubPlan1 =({ document }) => {
-	
-	const SubPlan11 = get(document, "recipient.SubPlan1",undefined);
-	return SubPlan11 ? (
-      <div className="row d-flex justify-content-center align-items-center">
-
-          <span style={GothamMedium165pt}>{SubPlan11}</span>
-
-      </div>) :null;
- 	
+const signatureBlockStyle = {
+  width: "180px",
+  textAlign: "center"
 };
 
+const serialStyle = {
+  position: "absolute",
+  right: "35px",
+  bottom: "12px"
+};
+
+export const Plan = ({ document }) => {
+  const degreePlan = get(document, "recipient.Plan", undefined);
+
+  return degreePlan ? (
+    <div style={centerRowStyle}>
+      <span style={GothamMedium165pt}>{degreePlan}</span>
+    </div>
+  ) : null;
+};
+
+export const SubPlan1 = ({ document }) => {
+  const subPlan1 = get(document, "recipient.SubPlan1", undefined);
+
+  return subPlan1 ? (
+    <div style={centerRowStyle}>
+      <span style={GothamMedium165pt}>{subPlan1}</span>
+    </div>
+  ) : null;
+};
 
 const Template = ({ document }) => (
-	
-	
-  <div className="container" style={borderImgStyle}>
-    <img
-      src={SUTD_CERT_LOGO}
-      style={logoImgStyle}
-      className="row d-flex justify-content-center"
-    />
-    <div>
-      {" "}
-      <br />
-      <br />
-      <div>
-        {" "}
-        <hr align="center" size="5" width="45%" color="black" />{" "}
-      </div>
-      <div className="row justify-content-center" style={{ marginTop: "1rem" }}>
-        <span style={GothamMedium12pt}>
-          Singapore University of Technology and Design
-        </span>
-      </div>
-      <div className="row d-flex justify-content-center">
-        <span style={GothamMedium12pt}>
-          upon the recommendation of the Faculty hereby confers on
-        </span>
-      </div>
-      <div
-        className="row d-flex justify-content-center align-items-center"
-        style={{ height: "100px", lineHeight: "175%" }}
-      >
-        <span style={GothamMedium265pt}>{document.recipient.name}</span>
-      </div>
-      <div
-        className="row d-flex justify-content-center"
-        style={{ marginBottom: "10px" }}
-      >
-        <span style={GothamMedium12pt}>the degree of</span>
-      </div>
-      <div className="row d-flex justify-content-center align-items-center">
-        <span style={GothamMedium22pt}>{document.name}</span>
-      </div>{" "}
+  <div style={outerWrapperStyle}>
+    <div style={certificateStyle}>
+      <img
+        src={SUTD_CERT_LOGO}
+        style={logoImgStyle}
+        alt="SUTD Logo"
+      />
 
-	  <div>
+      <div style={{ marginTop: "45px" }}>
+        <hr
+          style={{
+            width: "45%",
+            height: "2px",
+            backgroundColor: "black",
+            border: "none",
+            margin: "0 auto 20px auto"
+          }}
+        />
+
+        <div style={centerRowStyle}>
+          <span style={GothamMedium12pt}>
+            Singapore University of Technology and Design
+          </span>
+        </div>
+
+        <div style={centerRowStyle}>
+          <span style={GothamMedium12pt}>
+            upon the recommendation of the Faculty hereby confers on
+          </span>
+        </div>
+
+        <div
+          style={{
+            ...centerRowStyle,
+            height: "100px",
+            lineHeight: "175%"
+          }}
+        >
+          <span style={GothamMedium265pt}>
+            {document.recipient.name}
+          </span>
+        </div>
+
+        <div style={{ ...centerRowStyle, marginBottom: "10px" }}>
+          <span style={GothamMedium12pt}>the degree of</span>
+        </div>
+
+        <div style={centerRowStyle}>
+          <span style={GothamMedium22pt}>{document.name}</span>
+        </div>
+
         <Plan document={document} />
-      </div>
 
-      <div className="row d-flex justify-content-center align-items-center">
-        <span style={GothamMedium165pt}>{document.recipient.Honors}</span>
-      </div>
+        <div style={centerRowStyle}>
+          <span style={GothamMedium165pt}>
+            {document.recipient.Honors}
+          </span>
+        </div>
 
-      <div className="row d-flex justify-content-center align-items-center">
-	       <span style={GothamMedium165pt}>{document.recipient.SubPlan}</span>
-      </div>
+        <div style={centerRowStyle}>
+          <span style={GothamMedium165pt}>
+            {document.recipient.SubPlan}
+          </span>
+        </div>
 
-      <div>
         <SubPlan1 document={document} />
+
+        <div style={{ ...centerRowStyle, marginTop: "35px" }}>
+          <span style={GothamMedium12pt}>
+            with all its honor, privileges and obligations on
+          </span>
+        </div>
+
+        <div style={{ ...centerRowStyle, marginTop: "25px" }}>
+          <span style={GothamBold12pt}>
+            {formatDateFullMonthProper(document.issuedOn)}
+          </span>
+        </div>
       </div>
-	
-	
-      <br />
-      <div className="row d-flex justify-content-center">
-        <span style={GothamMedium12pt}>
-          with all its honor, privileges and obligations on
+
+      <div style={signatureSectionStyle}>
+        <div style={signatureBlockStyle}>
+          <img
+            src={document.additionalData.certSignatories[0].signature}
+            style={chairImgStyle}
+            alt="Chair Signature"
+          />
+          <div>
+            <span style={GothamMedium10pt}>
+              {document.additionalData.Signatorytype[0].type}
+            </span>
+          </div>
+        </div>
+
+        <div style={signatureBlockStyle}>
+          <img
+            src={document.additionalData.certSignatories[1].signature}
+            style={presidentImgStyle}
+            alt="President Signature"
+          />
+          <div>
+            <span style={GothamMedium10pt}>
+              {document.additionalData.Signatorytype[1].type}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div style={serialStyle}>
+        <span style={GothamMedium8pt}>
+          Serial No. {document.recipient.DegID}
         </span>
       </div>
-      <br />
-      <div className="row d-flex justify-content-center">
-        <span style={GothamBold12pt}>
-          {formatDateFullMonthProper(document.issuedOn)}
-        </span>
-      </div>
     </div>
-    <br />
-    <br />
-    <div className="row">
-      <div className="col-2">&nbsp;</div>
-      <div className="col-6">
-        <div>
-          <img src={document.additionalData.certSignatories[0].signature} style={chairImgStyle} />
-        </div>
-      </div>
-
-      <div className="col-2">
-        <div>
-          <img src={document.additionalData.certSignatories[1].signature}  style={presidentImgStyle} />
-        </div>
-      </div>
-    </div>
-
-    <div className="row">
-      <div style={{ marginRight: "13rem" }}>&nbsp;</div>
-      <div style={{ marginRight: "31rem" }}>
-        <div>
-          <span style={GothamMedium10pt}>{document.additionalData.Signatorytype[0].type} </span>
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <span style={GothamMedium10pt}>{document.additionalData.Signatorytype[1].type}</span>
-        </div>
-      </div>
-    </div>
-    <div className="row">
-      {" "}
-      <div className="col-11">&nbsp;</div>
-      <div className="co1-4">
-        <div>
-          <span style={GothamMedium8pt}>Serial No. {document.recipient.DegID} </span>
-        </div>
-      </div>
-    </div>
-    <br />
-    <br />
   </div>
 );
 
 export default Template;
+
 Template.propTypes = {
   document: PropTypes.object.isRequired
 };
