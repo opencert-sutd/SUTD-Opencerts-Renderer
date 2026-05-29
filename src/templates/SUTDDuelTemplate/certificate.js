@@ -1,15 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { format } from "date-fns";
 import { tz } from "moment-timezone";
 import { get } from "lodash";
-import {
-  SUTD_CERT_BG,
-  SUTD_CERT_LOGO,
-  SUTD_CHAIR,
-  SUTD_PRESIDENT,
-  NUS_CERT_LOGO
-} from "./images";
+import { SUTD_CERT_BG, SUTD_CERT_LOGO, NUS_CERT_LOGO } from "./images";
 
 export const TIMEZONE = "Asia/Singapore";
 
@@ -49,7 +42,7 @@ const GothamMedium12pt = {
 
 const GothamBold12pt = {
   fontFamily: "Gotham Medium",
-  fontWeight: "Bold",
+  fontWeight: "bold",
   fontSize: "12px",
   textAlign: "center",
   color: "black"
@@ -69,264 +62,236 @@ const GothamMedium265pt = {
   color: "Black"
 };
 
-const borderImgStyle = {
-  border: "1px solid",
-  borderColor: "black",
+const outerWrapperStyle = {
+  width: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "flex-start",
+  backgroundColor: "transparent",
+  padding: "20px 0",
+  overflow: "hidden"
+};
+
+const certificateStyle = {
+  width: "1120px",
+  height: "630px",
+  margin: "0 auto",
+  border: "1px solid black",
   backgroundPosition: "1px",
   backgroundRepeat: "repeat",
   backgroundImage: `url(${SUTD_CERT_BG})`,
-  backgroundSize: "75px 75px"
+  backgroundSize: "75px 75px",
+  boxSizing: "border-box",
+  position: "relative",
+  padding: "42px 50px 28px 50px",
+  overflow: "hidden"
 };
 
-const logoImgStyle = {
+const logoRowStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "flex-start",
+  gap: "230px",
+  marginBottom: "32px"
+};
+
+const sutdLogoStyle = {
   width: "150px",
   height: "60px",
-  marginLeft: "43%",
-  marginTop: "5%"
+  objectFit: "contain"
 };
 
-const DuellogoImgStyle1 = {
+const nusLogoStyle = {
+  width: "135px",
+  height: "120px",
+  objectFit: "contain",
+  marginTop: "-20px"
+};
+
+const centerRowStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%"
+};
+
+const signatureGridStyle = {
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  columnGap: "170px",
+  width: "680px",
+  margin: "28px auto 0 auto"
+};
+
+const signatureBlockStyle = {
+  textAlign: "center"
+};
+
+const signatureImgStyle = {
   width: "150px",
   height: "60px",
-  marginLeft: "26%",
-  marginTop: "11%"
+  borderBottom: "1px solid black",
+  objectFit: "contain"
 };
 
-const DuellogoImgStyle2 = {
-  width: "163px",
-  height: "146px",
-  marginLeft: "50%",
-  marginTop: "5%"
+const serialStyle = {
+  position: "absolute",
+  right: "35px",
+  bottom: "12px"
 };
 
+export const Plan = ({ document }) => {
+  const degreePlan = get(document, "recipient.Plan", undefined);
 
-const chairImgStyle = {
-  width: "150px",
-  height: "60px",
-  borderBottom: "1px solid"
-};
-
-const presidentImgStyle = {
-  width: "150px",
-  height: "60px",
-  borderBottom: "1px solid"
-};
-
-export const Plan =({ document }) => {
-	
-	const DegreePlan = get(document, "recipient.Plan",undefined);
-	return DegreePlan ? (
-      <div className="row d-flex justify-content-center align-items-center">
-        {" "}
-        <span style={GothamMedium165pt}>{document.recipient.Plan}</span>
-      </div>) :null;
- 	
-};
-
-export const SubPlan1 =({ document }) => {
-	
-	const SubPlan11 = get(document, "recipient.SubPlan1",undefined);
-	return SubPlan11 ? (
-      <div className="row d-flex justify-content-center align-items-center">
-
-          <span style={GothamMedium165pt}>{SubPlan11}</span>
-
-      </div>) :null;
- 	
-};
-
-
-const Template = ({ document }) => (
-	
-  <div className="container" style={borderImgStyle}>
-      <div className="row">
-
-      <div className="col-6">
-        <div>
-    <img src={SUTD_CERT_LOGO} style={DuellogoImgStyle1}/>
-        </div>
-      </div>
-
-      <div className="col-6">
-        <div>
-    <img src={NUS_CERT_LOGO} style={DuellogoImgStyle2}/>
-        </div>
-      </div>
+  return degreePlan ? (
+    <div style={centerRowStyle}>
+      <span style={GothamMedium165pt}>{degreePlan}</span>
     </div>
-	
+  ) : null;
+};
+
+export const SubPlan1 = ({ document }) => {
+  const subPlan1 = get(document, "recipient.SubPlan1", undefined);
+
+  return subPlan1 ? (
+    <div style={centerRowStyle}>
+      <span style={GothamMedium165pt}>{subPlan1}</span>
+    </div>
+  ) : null;
+};
+
+const SignBlock = ({ signature, type, university }) => (
+  <div style={signatureBlockStyle}>
+    <img src={signature} style={signatureImgStyle} alt={type} />
     <div>
-      {" "}
-      <br />
-      <br />
-      <div>
-        {" "}
-
-      </div>
-      <div className="row justify-content-center" style={{ marginTop: "0rem" }}>
-        <span style={GothamMedium12pt}>
-          The Singapore University of Technology and Design
-        </span>
-      </div>
-      <div className="row d-flex justify-content-center">
-        <span style={GothamMedium12pt}>
-          and the National University of Singapore hereby jointly confer on
-        </span>
-      </div>
-      <div
-        className="row d-flex justify-content-center align-items-center"
-        style={{ height: "100px", lineHeight: "175%" }}
-      >
-        <span style={GothamMedium265pt}>{document.recipient.name}</span>
-      </div>
-      <div
-        className="row d-flex justify-content-center"
-        style={{ marginBottom: "10px" }}
-      >
-        <span style={GothamMedium12pt}>the degree of</span>
-      </div>
-      <div className="row d-flex justify-content-center align-items-center">
-        <span style={GothamMedium22pt}>{document.name}</span>
-      </div>{" "}
-
-	  <div>
-        <Plan document={document} />
-      </div>
-
-      <div className="row d-flex justify-content-center align-items-center">
-        <span style={GothamMedium165pt}>{document.recipient.Honors}</span>
-      </div>
-
-      <div className="row d-flex justify-content-center align-items-center">
-	       <span style={GothamMedium165pt}>{document.recipient.SubPlan}</span>
-      </div>
-
-      <div>
-        <SubPlan1 document={document} />
-      </div>
-	
-	
-      <br />
-      <div className="row d-flex justify-content-center">
-        <span style={GothamMedium12pt}>
-          with all its honour, privileges and obligations on
-        </span>
-      </div>
-      <br />
-      <div className="row d-flex justify-content-center">
-        <span style={GothamBold12pt}>
-          {formatDateFullMonthProper(document.issuedOn)}
-        </span>
-      </div>
+      <span style={GothamMedium10pt}>{type}</span>
     </div>
-    <br />
-    <br />
-    <div className="row">
-      <div className="col-2">&nbsp;</div>
-      <div className="col-6">
-        <div>
-          <img src={document.additionalData.certSignatories[0].signature} style={chairImgStyle} />
-        </div>
-      </div>
-
-      <div className="col-2">
-        <div>
-           <img src={document.additionalData.certSignatories[2].signature} style={chairImgStyle} />
-        </div>
-      </div>
+    <div style={{ marginTop: "-2px" }}>
+      <span style={GothamMedium10pt}>{university}</span>
     </div>
-
-    <div className="row">
-      <div style={{ marginRight: "12.5rem" }}>&nbsp;</div>
-      <div style={{ marginRight: "29.5rem" }}>
-        <div>
-          <span style={GothamMedium10pt}>{document.additionalData.Signatorytype[0].type} </span>
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <span style={GothamMedium10pt}>{document.additionalData.Signatorytype[2].type} </span>
-        </div>
-      </div>
-    </div>
-
-    <div className="row" style={{ marginTop: "-0.75rem" }}>
-      <div style={{ marginRight: "12.5rem" }}>&nbsp;</div>
-      <div style={{ marginRight: "23.5rem" }}>
-        <div>
-          <span style={GothamMedium10pt}>Singapore University of Technology and Design</span>
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <span style={GothamMedium10pt}>National University of Singapore</span>
-        </div>
-      </div>
-    </div>
-<br />     
-
-   <div className="row">
-      <div className="col-2">&nbsp;</div>
-      <div className="col-6">
-        <div>
-          <img src={document.additionalData.certSignatories[1].signature}  style={presidentImgStyle} />
-        </div>
-      </div>
-
-      <div className="col-2">
-        <div>
-          <img src={document.additionalData.certSignatories[3].signature}  style={presidentImgStyle} />
-        </div>
-      </div>
-    </div>
-
-    <div className="row">
-      <div style={{ marginRight: "12.5rem" }}>&nbsp;</div>
-      <div style={{ marginRight: "33.25rem" }}>
-        <div>
-          <span style={GothamMedium10pt}>{document.additionalData.Signatorytype[1].type}</span>
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <span style={GothamMedium10pt}>{document.additionalData.Signatorytype[3].type}</span>
-        </div>
-      </div>
-    </div>	
-	
- <div className="row" style={{ marginTop: "-0.75rem" }}>
-      <div style={{ marginRight: "12.5rem" }}>&nbsp;</div>
-      <div style={{ marginRight: "23.5rem" }}>
-        <div>
-          <span style={GothamMedium10pt}>Singapore University of Technology and Design</span>
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <span style={GothamMedium10pt}>National University of Singapore</span>
-        </div>
-      </div>
-    </div>
-
-	      
-    <div className="row">
-      {" "}
-      <div className="col-11">&nbsp;</div>
-      <div className="co1-4">
-        <div>
-          <span style={GothamMedium8pt}>Serial No. {document.recipient.DegID} </span>
-        </div>
-      </div>
-    </div>
-    <br />
-    <br />
   </div>
 );
 
-export default Template;
+const Template = ({ document }) => (
+  <div style={outerWrapperStyle}>
+    <div style={certificateStyle}>
+      <div style={logoRowStyle}>
+        <img
+          src={SUTD_CERT_LOGO}
+          style={sutdLogoStyle}
+          alt="Singapore University of Technology and Design"
+        />
+
+        <img
+          src={NUS_CERT_LOGO}
+          style={nusLogoStyle}
+          alt="National University of Singapore"
+        />
+      </div>
+
+      <div>
+        <div style={centerRowStyle}>
+          <span style={GothamMedium12pt}>
+            The Singapore University of Technology and Design
+          </span>
+        </div>
+
+        <div style={centerRowStyle}>
+          <span style={GothamMedium12pt}>
+            and the National University of Singapore hereby jointly confer on
+          </span>
+        </div>
+
+        <div
+          style={{
+            ...centerRowStyle,
+            height: "80px",
+            lineHeight: "175%"
+          }}
+        >
+          <span style={GothamMedium265pt}>{document.recipient.name}</span>
+        </div>
+
+        <div style={{ ...centerRowStyle, marginBottom: "8px" }}>
+          <span style={GothamMedium12pt}>the degree of</span>
+        </div>
+
+        <div style={centerRowStyle}>
+          <span style={GothamMedium22pt}>{document.name}</span>
+        </div>
+
+        <Plan document={document} />
+
+        <div style={centerRowStyle}>
+          <span style={GothamMedium165pt}>
+            {document.recipient.Honors}
+          </span>
+        </div>
+
+        <div style={centerRowStyle}>
+          <span style={GothamMedium165pt}>
+            {document.recipient.SubPlan}
+          </span>
+        </div>
+
+        <SubPlan1 document={document} />
+
+        <div style={{ ...centerRowStyle, marginTop: "22px" }}>
+          <span style={GothamMedium12pt}>
+            with all its honour, privileges and obligations on
+          </span>
+        </div>
+
+        <div style={{ ...centerRowStyle, marginTop: "16px" }}>
+          <span style={GothamBold12pt}>
+            {formatDateFullMonthProper(document.issuedOn)}
+          </span>
+        </div>
+      </div>
+
+      <div style={signatureGridStyle}>
+        <SignBlock
+          signature={document.additionalData.certSignatories[0].signature}
+          type={document.additionalData.Signatorytype[0].type}
+          university="Singapore University of Technology and Design"
+        />
+
+        <SignBlock
+          signature={document.additionalData.certSignatories[2].signature}
+          type={document.additionalData.Signatorytype[2].type}
+          university="National University of Singapore"
+        />
+
+        <SignBlock
+          signature={document.additionalData.certSignatories[1].signature}
+          type={document.additionalData.Signatorytype[1].type}
+          university="Singapore University of Technology and Design"
+        />
+
+        <SignBlock
+          signature={document.additionalData.certSignatories[3].signature}
+          type={document.additionalData.Signatorytype[3].type}
+          university="National University of Singapore"
+        />
+      </div>
+
+      <div style={serialStyle}>
+        <span style={GothamMedium8pt}>
+          Serial No. {document.recipient.DegID}
+        </span>
+      </div>
+    </div>
+  </div>
+);
+
+SignBlock.propTypes = {
+  signature: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  university: PropTypes.string.isRequired
+};
+
 Template.propTypes = {
   document: PropTypes.object.isRequired
 };
+
+export default Template;
