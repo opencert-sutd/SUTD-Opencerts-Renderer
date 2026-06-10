@@ -105,13 +105,13 @@ const centerRowStyle = {
 };
 
 const chairImgStyle = {
-  width: "150px",
+  width: "200px",
   height: "60px",
   borderBottom: "1px solid black"
 };
 
 const presidentImgStyle = {
-  width: "150px",
+  width: "200px",
   height: "60px",
   borderBottom: "1px solid black"
 };
@@ -156,7 +156,7 @@ const Template = ({ document }) => {
   const signatureSectionStyle = {
     display: "flex",
     justifyContent: "space-between",
-    width: "520px",
+    width: "820px",
     margin: `${signatureTopMargin}px auto 0 auto`
   };
 
@@ -246,7 +246,7 @@ const Template = ({ document }) => {
         </div>
 
         <div style={signatureSectionStyle}>
-          <div style={{ width: "180px", textAlign: "center" }}>
+          <div style={{ width: "220px", textAlign: "center" }}>
             <img
               src={document.additionalData.certSignatories[0].signature}
               style={chairImgStyle}
@@ -259,7 +259,7 @@ const Template = ({ document }) => {
             </div>
           </div>
 
-          <div style={{ width: "180px", textAlign: "center" }}>
+          <div style={{ width: "220px", textAlign: "center" }}>
             <img
               src={document.additionalData.certSignatories[1].signature}
               style={presidentImgStyle}
