@@ -172,7 +172,7 @@ const Template = ({ document }) => {
         <div style={{ marginTop: "45px" }}>
           <hr
             style={{
-              width: "45%",
+              width: "35%",
               height: "2px",
               backgroundColor: "black",
               border: "none",
