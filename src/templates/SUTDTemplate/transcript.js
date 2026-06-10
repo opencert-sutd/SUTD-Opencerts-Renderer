@@ -20,18 +20,18 @@ export const formatDateFullMonth = dateString => {
   return tz(date, TIMEZONE).format("D MMMM YYYY");
 };
 
-const text = {
+const textStyle = {
   fontFamily: "Arial",
   fontSize: "14px",
   color: "black"
 };
 
 const bold = {
-  ...text,
+  ...textStyle,
   fontWeight: "bold"
 };
 
-const title = {
+const titleStyle = {
   fontFamily: "Arial",
   fontSize: "22px",
   fontWeight: "bold",
@@ -120,7 +120,7 @@ export const Plan = ({ document }) => {
 
   return degreePlan ? (
     <>
-      <div style={text}>Plan :</div>
+      <div style={textStyle}>Plan :</div>
       <div style={bold}>{degreePlan}</div>
       <div />
       <div />
@@ -155,19 +155,19 @@ export const SubjectGrades = ({ document }) => {
 
             {s.grades.map((t, i) => (
               <div style={rowStyle} key={i}>
-                <div style={text}>{t.courseCode}</div>
-                <div style={text}>{t.name}</div>
-                <div style={{ ...text, textAlign: "center" }}>{t.courseLevel}</div>
-                <div style={{ ...text, textAlign: "center" }}>{t.courseCredit}</div>
-                <div style={text}>{t.grade}</div>
+                <div style={textStyle}>{t.courseCode}</div>
+                <div style={textStyle}>{t.name}</div>
+                <div style={{ ...textStyle, textAlign: "center" }}>{t.courseLevel}</div>
+                <div style={{ ...textStyle, textAlign: "center" }}>{t.courseCredit}</div>
+                <div style={textStyle}>{t.grade}</div>
               </div>
             ))}
 
             <div style={{ marginTop: "12px" }}>
-              <div style={text}>
+              <div style={textStyle}>
                 Term Grade Point Average : <strong>{tgpa}</strong>
               </div>
-              <div style={text}>
+              <div style={textStyle}>
                 Cumulative Grade Point Average : <strong>{cgpa}</strong>
               </div>
               <div style={{ ...bold, fontSize: "24px", textAlign: "center" }}>*****</div>
@@ -187,7 +187,7 @@ export const RemarksFooter = ({ document }) => {
     <div>
       <hr style={footerLineStyle} />
       <div style={bold}>Remarks:</div>
-      <div style={{ ...text, whiteSpace: "pre-wrap", marginTop: "10px" }}>
+      <div style={{ ...textStyle, whiteSpace: "pre-wrap", marginTop: "10px" }}>
         {remarksText}
       </div>
     </div>
@@ -201,7 +201,7 @@ export const AwardsFooter = ({ document }) => {
   return awards ? (
     <div style={sectionStyle}>
       <div style={bold}>Awards:</div>
-      <div style={{ ...text, whiteSpace: "pre-wrap", marginTop: "10px" }}>
+      <div style={{ ...textStyle, whiteSpace: "pre-wrap", marginTop: "10px" }}>
         {awardsText}
       </div>
     </div>
@@ -213,7 +213,7 @@ export const ThesisFooter = ({ document }) => {
 
   return thesis ? (
     <div style={sectionStyle}>
-      <span style={text}>Thesis Title: {thesis}</span>
+      <span style={textStyle}>Thesis Title: {thesis}</span>
     </div>
   ) : null;
 };
@@ -232,18 +232,17 @@ export const DegreeFooter = ({ document }) => {
       <ul style={{ marginTop: "10px" }}>
         {degree11 && (
           <li>
-            <span style={{ ...text, whiteSpace: "pre-wrap" }}>{degree11}</span>
+            <span style={{ ...textStyle, whiteSpace: "pre-wrap" }}>{degree11}</span>
           </li>
         )}
-
         {degree22 && (
           <li>
-            <span style={{ ...text, whiteSpace: "pre-wrap" }}>{degree22}</span>
+            <span style={{ ...textStyle, whiteSpace: "pre-wrap" }}>{degree22}</span>
           </li>
         )}
       </ul>
 
-      <div style={text}>On: {formatDateFullMonthProper(document.issuedOn)}</div>
+      <div style={textStyle}>On: {formatDateFullMonthProper(document.issuedOn)}</div>
     </div>
   );
 };
@@ -253,7 +252,7 @@ export const TXTFooter = ({ document }) => {
 
   return txtData ? (
     <div style={sectionStyle}>
-      <span style={text}>{txtData}</span>
+      <span style={textStyle}>{txtData}</span>
     </div>
   ) : null;
 };
@@ -263,14 +262,13 @@ const Transcript = ({ document }) => (
     <div style={pageStyle}>
       <div style={headerStyle}>
         <div>
-          <span style={title}>Office of the Registrar</span>
-          <span style={redTitle}>Academic Transcript</span>
+          <div style={titleStyle}>Office of the Registrar</div>
+          <div style={redTitle}>Academic Transcript</div>
         </div>
 
         <img
           src={SUTD_CERT_LOGO}
           style={logoStyle}
-          title="Singapore University of Technology and Design"
           alt="SUTD Logo"
         />
       </div>
@@ -280,14 +278,14 @@ const Transcript = ({ document }) => (
       </div>
 
       <div style={sectionStyle}>
-        <div style={text}>
+        <div style={textStyle}>
           SUTD ID : <strong>{document.recipient.studentId}</strong>
         </div>
-        <div style={text}>
+        <div style={textStyle}>
           Date of Birth :{" "}
           <strong>{formatDateFullMonth(document.recipient.Birthdate)}</strong>
         </div>
-        <div style={text}>
+        <div style={textStyle}>
           Date of Admission :{" "}
           <strong>
             {formatDateFullMonthProper(document.recipient.AdmissionDate)}
@@ -296,9 +294,9 @@ const Transcript = ({ document }) => (
       </div>
 
       <div style={infoGridStyle}>
-        <div style={text}>Programme :</div>
+        <div style={textStyle}>Programme :</div>
         <div style={bold}>{document.recipient.Programme}</div>
-        <div style={text}>Status :</div>
+        <div style={textStyle}>Status :</div>
         <div style={bold}>{document.recipient.Status}</div>
 
         <Plan document={document} />
@@ -370,4 +368,5 @@ Transcript.propTypes = {
   document: PropTypes.object.isRequired
 };
 
+export { Transcript as SUTD_TRANSCRIPT };
 export default Transcript;
