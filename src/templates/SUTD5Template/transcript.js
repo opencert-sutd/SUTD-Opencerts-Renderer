@@ -78,7 +78,7 @@ const registrarTitleStyle = {
 
 const diveTitleStyle = {
   fontFamily: "Arial",
-  fontSize: "28px",
+  fontSize: "22px",
   color: "#cc0000",
   fontWeight: "400",
   lineHeight: "1.2"
@@ -273,11 +273,6 @@ const Transcript = ({ document }) => (
       <div style={infoGridStyle}>
         <div style={text}>Programme :</div>
         <div style={bold}>{document.recipient.Programme}</div>
-      </div>
-
-      <div style={activityIntroStyle}>
-        Fifth Row Activities are activities undertaken by students outside the
-        classroom. Please refer to the guide at the back for more information.
       </div>
 
       <SubjectGrades document={document} />
