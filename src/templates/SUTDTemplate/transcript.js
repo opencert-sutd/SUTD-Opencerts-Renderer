@@ -40,7 +40,7 @@ const titleStyle = {
 
 const redTitle = {
   fontFamily: "Arial",
-  fontSize: "22px",
+  fontSize: "28px",
   color: "brown"
 };
 
