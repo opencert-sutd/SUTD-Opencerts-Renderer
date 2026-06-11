@@ -69,12 +69,11 @@ const pageStyle = {
   overflow: "visible"
 };
 
+// Header now only contains logo + "Office of the Registrar" — no bottom border here
 const headerStyle = {
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "flex-start",
-  borderBottom: "1px solid #ddd",
-  paddingBottom: "12px"
+  alignItems: "flex-start"
 };
 
 const logoStyle = {
@@ -260,18 +259,22 @@ export const TXTFooter = ({ document }) => {
 const Transcript = ({ document }) => (
   <div style={outerWrapperStyle}>
     <div style={pageStyle}>
-      <div style={headerStyle}>
-        <div>
-          <div style={titleStyle}>Office of the Registrar</div>
-          <div style={redTitle}>Academic Transcript</div>
-        </div>
 
+      {/* TOP HEADER ROW: "Office of the Registrar" (left) + Logo (right) */}
+      <div style={headerStyle}>
+        <div style={titleStyle}>Office of the Registrar</div>
         <img
           src={SUTD_CERT_LOGO}
           style={logoStyle}
           alt="SUTD Logo"
         />
       </div>
+
+      {/* "Academic Transcript" on its own line below, in brown, with separator beneath */}
+      <div style={{ marginTop: "16px", marginBottom: "8px" }}>
+        <div style={redTitle}>Academic Transcript</div>
+      </div>
+      <hr style={{ border: "none", borderTop: "1px solid #ddd", margin: "0 0 0 0" }} />
 
       <div style={sectionStyle}>
         <div style={bold}>{document.recipient.name}</div>
