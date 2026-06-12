@@ -141,10 +141,10 @@ export const SubjectGrades = ({ document }) => {
     <div>
       {semesters.map((s, j) => {
         const cgpa1 = get(s.grades, "[0].cumGPA");
-        const cgpa = cgpa1 === 0 ? "Not Applicable" : cgpa1;
+        const cgpa = cgpa1 == 0 ? "Not Applicable" : cgpa1;
 
         const tgpa1 = get(s.grades, "[0].termGPA");
-        const tgpa = tgpa1 === 0 ? "Not Applicable" : tgpa1;
+        const tgpa = tgpa1 == 0 ? "Not Applicable" : tgpa1;
 
         return (
           <div key={j} style={{ marginTop: "14px" }}>
