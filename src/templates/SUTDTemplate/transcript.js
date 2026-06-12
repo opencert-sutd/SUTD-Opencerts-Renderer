@@ -105,7 +105,8 @@ const tableHeaderStyle = {
 const rowStyle = {
   display: "grid",
   gridTemplateColumns: "160px 1fr 90px 90px 90px",
-  margin: "8px 0"
+  rowGap: "2px",
+  marginTop: "18px"
 };
 
 const footerLineStyle = {
