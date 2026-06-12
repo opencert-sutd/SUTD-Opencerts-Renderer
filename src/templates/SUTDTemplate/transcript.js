@@ -158,7 +158,7 @@ export const SubjectGrades = ({ document }) => {
                 <div style={{ ...textStyle, gridColumn:  (t.name && t.name.trim()) ? "auto": "span 2"}}>{t.courseCode}</div>
                 <div style={textStyle}>{t.name}</div>
                 <div style={{ ...textStyle, textAlign: "center" }}>{t.courseLevel}</div>
-                <div style={{ ...textStyle, textAlign: "center" }}>{t.courseCredit == 0 ? "-" : t.courseCredit}</div>
+                <div style={{ ...textStyle, textAlign: "center" }}>{t.courseCredit}</div>
                 <div style={textStyle}>{t.grade}</div>
               </div>
 
