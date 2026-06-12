@@ -73,8 +73,8 @@ const outerWrapperStyle = {
 };
 
 const certificateStyle = {
-  width: "1100px",
-  height: "800px",
+  width: "1080px",
+  height: "780px",
   border: "1px solid black",
   backgroundPosition: "1px",
   backgroundRepeat: "repeat",
