@@ -153,7 +153,7 @@ export const SubjectGrades = ({ document }) => {
             </div>
 
             {s.grades.map((t, i) => (
-							  const hasName = t.name && t.name.trim()
+	        const hasName = t.name && t.name.trim();			
               <div style={rowStyle} key={i}>
                 <div style={{ ...textStyle, gridColumn: hasName ? "auto": "2 / span 2"}}>{t.courseCode}</div>
                 <div style={textStyle}>{t.name}</div>
@@ -161,6 +161,7 @@ export const SubjectGrades = ({ document }) => {
                 <div style={{ ...textStyle, textAlign: "center" }}>{t.courseCredit}</div>
                 <div style={textStyle}>{t.grade}</div>
               </div>
+);
             ))}
 
             <div style={{ marginTop: "12px" }}>
