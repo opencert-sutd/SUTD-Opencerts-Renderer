@@ -181,7 +181,7 @@ export const SubjectGrades = ({ document }) => {
                     key={i}
                     style={{
                       display: "grid",
-                      gridTemplateColumns: "1fr 100px 220px",
+                      gridTemplateColumns: "1fr 100px 280px",
                       borderLeft: "1px solid black",
                       borderRight: "1px solid black",
                       borderBottom: "1px solid black"
@@ -209,7 +209,7 @@ export const SubjectGrades = ({ document }) => {
                     key={i}
                     style={{
                       display: "grid",
-                      gridTemplateColumns: "1fr 220px",
+                      gridTemplateColumns: "1fr 280px",
                       borderLeft: "1px solid black",
                       borderRight: "1px solid black",
                       borderBottom: "1px solid black"
