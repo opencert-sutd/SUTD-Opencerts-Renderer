@@ -110,14 +110,14 @@ const activityIntroStyle = {
 
 const tableHeader2Style = {
   display: "grid",
-  gridTemplateColumns: "1fr 220px",
+  gridTemplateColumns: "1fr 280px",
   border: "1px solid black",
   marginTop: "12px"
 };
 
 const tableHeader3Style = {
   display: "grid",
-  gridTemplateColumns: "1fr 100px 220px",
+  gridTemplateColumns: "1fr 100px 280px",
   border: "1px solid black",
   marginTop: "12px"
 };
