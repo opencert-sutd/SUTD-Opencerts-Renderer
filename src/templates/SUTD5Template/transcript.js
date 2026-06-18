@@ -236,7 +236,7 @@ const Transcript = ({ document }) => (
           <div style={registrarTitleStyle}>Office of the Registrar</div>
 
           <div style={diveTitleStyle}>
-            Design Innovation and Venture Exploration (DIVE) Certificate
+            Design.AI Innovation and Venture Exploration (DIVE) Certificate
           </div>
         </div>
 
@@ -307,8 +307,7 @@ const Transcript = ({ document }) => (
           not required.
         </div>
         <div style={smallBrown}>
-          A black and white transcript is not an original. Transcript guide on
-          back.
+          A black and white transcript is not an original.
         </div>
       </div>
 
