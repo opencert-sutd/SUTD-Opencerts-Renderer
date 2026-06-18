@@ -236,7 +236,7 @@ const Transcript = ({ document }) => (
           <div style={registrarTitleStyle}>Office of the Registrar</div>
 
           <div style={diveTitleStyle}>
-            Design.AI Innovation and Venture Exploration (DIVE) Certificate
+            Design·AI Innovation and Venture Exploration (DIVE) Certificate
           </div>
         </div>
 
