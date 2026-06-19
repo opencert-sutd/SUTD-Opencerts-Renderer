@@ -263,7 +263,9 @@ const Transcript = ({ document }) => (
       <div style={headerStyle}>
         <div>
           <span style={title}>Office of the Registrar</span>
+        <div style={{ marginTop: "16px", marginBottom: "8px" }}>
           <span style={redTitle}>Academic Transcript</span>
+        </div>
         </div>
 
         <img
